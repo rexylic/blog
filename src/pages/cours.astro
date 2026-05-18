@@ -1,0 +1,69 @@
+---
+import yaml from 'js-yaml';
+import { marked } from 'marked';
+import Basic from '../layouts/Basic.astro';
+
+interface TermMeta {
+    label: string;
+    intro?: string;
+    courses: string[];
+}
+interface Course {
+    code: string;
+    title: string;
+    instructor?: string;
+    review: string;
+}
+
+const termFiles = import.meta.glob(
+    '../assets/content/courses/*/_term.yml',
+    { eager: true, query: '?raw', import: 'default' }
+) as Record<string, string>;
+
+const courseFiles = import.meta.glob(
+    '../assets/content/courses/*/!(_*).yml',
+    { eager: true, query: '?raw', import: 'default' }
+) as Record<string, string>;
+
+const orderRaw = (await import('../assets/content/courses/_terms-order.yml?raw')).default;
+const termOrder = yaml.load(orderRaw) as string[];
+
+const termIdFromPath = (p: string) => p.split('/').slice(-2, -1)[0];
+const courseIdFromPath = (p: string) => p.split('/').pop()!.replace(/\.yml$/, '');
+
+const terms = termOrder.map((tid) => {
+    const tPath = Object.keys(termFiles).find((p) => termIdFromPath(p) === tid)!;
+    const meta = yaml.load(termFiles[tPath]) as TermMeta;
+    const courses = meta.courses.map((cid) => {
+        const cPath = Object.keys(courseFiles).find(
+            (p) => termIdFromPath(p) === tid && courseIdFromPath(p) === cid
+        )!;
+        return { id: cid, ...(yaml.load(courseFiles[cPath]) as Course) };
+    });
+    return { id: tid, ...meta, courses };
+});
+
+const headings = terms.flatMap((t) => [
+    { depth: 1 as const, slug: t.id, text: t.label },
+    ...t.courses.map((c) => ({ depth: 2 as const, slug: c.id, text: c.code })),
+]);
+---
+
+<Basic title="Courses" math={true} headings={headings}>
+    <p>Short reviews for some of the courses I've taken.</p>
+    {terms.map((t) => (
+        <>
+            <h1 id={t.id}>{t.label}</h1>
+            {t.intro && <p>{t.intro}</p>}
+            {t.courses.map((c) => (
+                <>
+                    <h2 id={c.id}>{c.code} - {c.title}</h2>
+                    {c.instructor && <p>Taught by <em>{c.instructor}</em>.</p>}
+                    <Fragment set:html={marked.parse(c.review)} />
+                </>
+            ))}
+        </>
+    ))}
+    <hr />
+    <p>This concludes my undergraduate career.</p>
+</Basic>

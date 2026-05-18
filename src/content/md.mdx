@@ -1,0 +1,163 @@
+---
+title: Markdown
+---
+
+Markdown is an ubiquitous markup language (how ironic) that represents a proper subset of HTML. 
+This entire site is authored in markdown. 
+
+Italicize text by surrounding it with `_`. 
+Bold with `**`. 
+
+```
+_very_ **Important!**
+```
+
+Headings are on their own lines, prefixed by `#` signs:
+
+```
+# Headings
+```
+
+The more signs, the lower the level.
+`##` starts a second-level heading.
+
+Start a list by prefix `-`,
+or a numbered list by numbers:
+
+```
+- bacon      1. health
+- ham        2. connections
+- eggs       3. hobbies
+```
+
+Quote sentences by prefix `>`:
+
+```
+> May the odds be ever in your favour. 
+```
+
+Link to a section title, a local file, or an URL:
+
+```
+[Google](https://google.ca)
+```
+
+Include an image:
+
+```
+![Image Caption](image.jpeg)
+```
+
+Typeset monospaced texts by surrounding it with backticks. 
+For code blocks, indent the source code. 
+
+```
+The function name `isEven` will be monospaced. 
+```
+
+Tables can be made, but should be avoided due to ugliness. 
+
+# Pandoc Extensions
+
+The popular document converter [pandoc](https://pandoc.org/)
+has its own markdown implementation that includes more convenient syntaxes. 
+I'll list some of them here. 
+
+Include a link without repeating the URL as text:
+
+```
+Here's the link: <https://agar.io>
+```
+
+Add HTML attributes to headers with curly brackets:
+
+```
+# Sony WH-1000XM6 {#sony-headphones .confused-name}
+```
+
+this also works for text spans:
+
+```
+I got you a [birthday cake]{.surprise}!
+```
+
+and fenced divs:
+
+```
+::: center
+Welcome to Our Website
+Please Take a Scroll
+:::
+```
+
+and fenced code blocks:
+
+````
+``` swift {.numberLines}
+enum PlayingCard: CustomStringConvertible {
+    ...
+```
+````
+
+To reference a heading without using its `id` value,
+simply write the heading name in square brackets:
+
+```
+Check out [these headphones][Sony WH-1000XM6]!
+```
+
+Instead of using explicit line break symbols (`\`),
+simply place lines in line blocks,
+and each line in the source will be on its own line in the target:
+
+```
+| to see a world in a grain of sand
+| and a heaven in a wild flower
+```
+
+List definitions:
+
+```
+school
+:    (n.) child prison
+:    (n.) whole bunch of fish
+```
+
+List examples, and reference them:
+
+```
+(@) I went to school, believe it or not
+(@serious) The school was okay actually
+
+You know when I said (@serious) I wasn't actually serious
+```
+
+Compared to original markdown,
+pandoc has a way nicer syntax for tables:
+
+```
+Name    Age
+----  -----
+Bob      29
+Alice    28
+```
+
+Add a metadata block at the beginning of a markdown file:
+
+```
+---
+title: My Life story
+author:
+    - Me
+    - My Parents
+abstract: |
+    I was born at a very young age of 1
+...
+```
+
+GitHub-style markdown alerts:
+
+```
+> [!TIP]
+> Helpful advice for doing things better or more easily.
+```

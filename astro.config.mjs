@@ -3,33 +3,59 @@
 import mdx from '@astrojs/mdx';
 import sitemap from '@astrojs/sitemap';
 import { defineConfig, fontProviders } from 'astro/config';
+import remarkMath from 'remark-math';
+import rehypeKatex from 'rehype-katex';
+import rehypeMdxJsxHeadings from './src/rehype-mdx-jsx-headings.mjs';
 
 // https://astro.build/config
 export default defineConfig({
-	site: 'https://example.com',
+	site: 'https://blog.rexylic.com',
 	integrations: [mdx(), sitemap()],
+	markdown: {
+		remarkPlugins: [remarkMath],
+		rehypePlugins: [rehypeMdxJsxHeadings, rehypeKatex],
+	},
 	fonts: [
 		{
 			provider: fontProviders.local(),
-			name: 'Atkinson',
-			cssVariable: '--font-atkinson',
-			fallbacks: ['sans-serif'],
+			name: 'Condensed Mono',
+			cssVariable: '--font-cm',
+			fallbacks: ['monospace'],
+			display: 'swap',
+			subsets: ['latin'],
+			// unicodeRange: ['U+25CA'],
 			options: {
 				variants: [
 					{
-						src: ['./src/assets/fonts/atkinson-regular.woff'],
-						weight: 400,
+						src: ['./src/assets/fonts/cm/r.woff2'],
+						weight: 'normal',
 						style: 'normal',
-						display: 'swap',
 					},
 					{
-						src: ['./src/assets/fonts/atkinson-bold.woff'],
-						weight: 700,
+						src: ['./src/assets/fonts/cm/i.woff2'],
+						weight: 'normal',
+						style: 'italic',
+					},
+					{
+						src: ['./src/assets/fonts/cm/b.woff2'],
+						weight: 'bold',
 						style: 'normal',
-						display: 'swap',
+					},
+					{
+						src: ['./src/assets/fonts/cm/z.woff2'],
+						weight: 'bold',
+						style: 'italic',
 					},
 				],
 			},
 		},
+		{
+			provider: fontProviders.google(),
+			name: 'LXGW WenKai Mono TC',
+			cssVariable: '--font-lxgw',
+			fallbacks: ['serif'],
+			subsets: ['latin', 'chinese-traditional'],
+			display: 'swap',
+		}
 	],
 });

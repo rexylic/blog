@@ -1,0 +1,81 @@
+---
+import { Font } from "astro:assets";
+import '../styles/global.css';
+import LeftNavBar from '../components/LeftNavBar.astro';
+import LeftToC from '../components/LeftToC.astro';
+
+interface Heading {
+    depth: number;
+    slug: string;
+    text: string;
+}
+interface Props {
+    title: string;
+    themeColor?: string;
+    math?: boolean;
+    cjk?: boolean;
+    headings?: Heading[];
+}
+const {
+    title,
+    themeColor = "#1e9a7c",
+    math = false,
+    cjk = false,
+    headings,
+} = Astro.props;
+const showToc = headings && headings.some((h) => h.depth === 1);
+---
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta name="theme-color" content={themeColor} />
+        <title>{title}</title>
+        <Font cssVariable="--font-cm" />
+        {cjk && <Font cssVariable="--font-lxgw" />}
+        {math && <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" />}
+    </head>
+    <body>
+        <div id="container">
+            {showToc ? <LeftToC title={title} headings={headings!} /> : <LeftNavBar title={title} />}
+            <main>
+                <slot />
+            </main>
+        </div>
+    </body>
+</html>
+<style>
+    #container {
+        margin: auto;
+        width: 50rem;
+        height: 100%;
+        padding: 6em;
+    }
+
+    main {
+        width: 40rem;
+        margin-left: 10rem;
+        text-align: left;
+        overflow-x: hidden;
+        overflow-y: auto;
+        height: 100%;
+    }
+
+    @media (max-width: 700px) {
+        #container {
+            width: 100%;
+            padding: 1.5em;
+        }
+        
+        main {
+            margin-left: 0;
+            width: 100%;
+        }
+    }
+
+    :global(main>:first-child) {
+        margin-top: 0;
+        padding-top: 0;
+    }
+</style>

@@ -1,0 +1,83 @@
+---
+interface Heading {
+    depth: number;
+    slug: string;
+    text: string;
+}
+
+interface Props {
+    title: string;
+    headings: Heading[];
+}
+
+const { title, headings } = Astro.props;
+const h1s = headings.filter((h) => h.depth === 1);
+---
+
+<nav>
+    <div class="title">
+        <a href="/">{title}</a>
+    </div>
+    <div class="links">
+        {h1s.map((h) => <a href={`#${h.slug}`}>{h.text}</a>)}
+    </div>
+    <div class="secret"></div>
+</nav>
+<style>
+    nav {
+        width: 8rem;
+        text-align: left;
+        position: fixed;
+        display: block;
+        font-size: calc(1em - 2px);
+    }
+
+    @media (max-width: 700px) {
+        nav {
+            display: none;
+        }
+    }
+
+    nav > div {
+        margin-bottom: 3em;
+    }
+
+    nav .title {
+        color: #eeeeee;
+        background: var(--theme);
+        width: fit-content;
+        align-self: auto;
+        border-radius: 0.3em;
+    }
+
+    nav .title:hover {
+        color: var(--theme);
+        background: #eeeeee;
+    }
+
+    nav .title a {
+        display: block;
+        padding: 0.3em 0.5em;
+        border-radius: 0.3em;
+        color: inherit;
+    }
+
+    nav .title a:hover {
+        color: inherit;
+        background: inherit;
+    }
+
+    nav .links a,
+    nav .secret a {
+        display: block;
+        color: var(--bg);
+    }
+
+    nav .links a:hover {
+        color: var(--theme);
+    }
+
+    nav .secret a:hover {
+        color: #f74f9f;
+    }
+</style>

@@ -1,0 +1,35 @@
+:root {
+	--theme: #1e9a7c;
+	--corner: 4px;
+	color: var(--fg);
+	background-color: var(--bg);
+	font-size: 16px;
+	font-family: var(--font-cm);
+	line-height: 1.4;
+	tab-size: 2;
+	text-decoration-thickness: 1px;
+}
+
+@media screen and (prefers-color-scheme: light) {
+	:root {
+		--fg: #484848;
+		--bg: #F6F6F6;
+		--block-fg: black;
+		--block-bg: white;
+		--link-fg: var(--theme);
+		--link-hover-fg: var(--theme);
+		--link-hover-bg: var(--bg);
+	}
+}
+
+@media screen and (prefers-color-scheme: dark) {
+	:root {
+		--fg: #d8d8d8;
+		--bg: #161616;
+		--block-fg: white;
+		--block-bg: black;
+		--link-fg: var(--theme);
+		--link-hover-fg: var(--theme);
+		--link-hover-bg: var(--bg);
+	}
+}

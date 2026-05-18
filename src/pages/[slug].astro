@@ -1,0 +1,21 @@
+---
+import { getCollection, render } from 'astro:content';
+import Basic from '../layouts/Basic.astro';
+
+export async function getStaticPaths() {
+  const pages = await getCollection('pages');
+  return pages
+    .filter((page) => page.id !== 'index')
+    .map((page) => ({
+      params: { slug: page.id },
+      props: { page },
+    }));
+}
+
+const { page } = Astro.props;
+const { Content, headings } = await render(page);
+---
+
+<Basic title={page.data.title} math={page.data.math} headings={headings}>
+    <Content />
+</Basic>
