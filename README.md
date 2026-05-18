@@ -1,60 +1,63 @@
-# Chiri 🌸
+# Astro Starter Kit: Blog
 
-![screenshot-light](public/screenshots/screenshot-light.png)
-![screenshot-dark](public/screenshots/screenshot-dark.png)
+```sh
+npm create astro@latest -- --template blog
+```
 
-Chiri is a minimal blog theme built with [Astro](https://astro.build), offering customization options while preserving its clean aesthetic.
+> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
 
-Check the [demo](https://chiri.the3ash.com/) for more details.
+Features:
 
-## Features
+- ✅ Minimal styling (make it your own!)
+- ✅ 100/100 Lighthouse performance
+- ✅ SEO-friendly with canonical URLs and Open Graph data
+- ✅ Sitemap support
+- ✅ RSS Feed support
+- ✅ Markdown & MDX support
 
-- [x] Build with Astro
-- [x] Responsive
-- [x] Light / Dark mode
-- [x] MDX
-- [x] KaTeX
-- [x] Sitemap
-- [x] OpenGraph
-- [x] RSS
+## 🚀 Project Structure
 
-## Getting Started
+Inside of your Astro project, you'll see the following folders and files:
 
-1. [Fork](https://github.com/the3ash/astro-chiri/fork) this repository, or use this template to [create a new repository](https://github.com/new?template_name=astro-chiri&template_owner=the3ash).
+```text
+├── public/
+├── src/
+│   ├── assets/
+│   ├── components/
+│   ├── content/
+│   ├── layouts/
+│   └── pages/
+├── astro.config.mjs
+├── README.md
+├── package.json
+└── tsconfig.json
+```
 
-2. Run the following commands:
+Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
 
-   ```bash
-   git clone <your-repo-url>
+There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
 
-   cd <your-repo-name>
+The `src/content/` directory contains "collections" of related Markdown and MDX documents. Use `getCollection()` to retrieve posts from `src/content/blog/`, and type-check your frontmatter using an optional schema. See [Astro's Content Collections docs](https://docs.astro.build/en/guides/content-collections/) to learn more.
 
-   pnpm install
+Any static assets, like images, can be placed in the `public/` directory.
 
-   pnpm dev
-   ```
+## 🧞 Commands
 
-3. Edit `src/config.ts` and `src/content/about/about.md` to your liking.
+All commands are run from the root of the project, from a terminal:
 
-4. Use `pnpm new <title>` to create new posts, or add your posts to `src/content/posts`.
+| Command                   | Action                                           |
+| :------------------------ | :----------------------------------------------- |
+| `npm install`             | Installs dependencies                            |
+| `npm run dev`             | Starts local dev server at `localhost:4321`      |
+| `npm run build`           | Build your production site to `./dist/`          |
+| `npm run preview`         | Preview your build locally, before deploying     |
+| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
+| `npm run astro -- --help` | Get help using the Astro CLI                     |
 
-5. Build with `pnpm build` and deploy the generated `dist/` directory to any static hosting platform. Link Card metadata is fetched automatically during `pnpm dev` and `pnpm build` and stored in `src/data/link-card-metadata.json` so cards render as static HTML.
+## 👀 Want to learn more?
 
-&emsp;[![Deploy to Netlify](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start) [![Deploy to Vercel](https://vercel.com/button)](https://vercel.com/new)
+Check out [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
 
-## Commands
+## Credit
 
-- `pnpm new <title>` - Create a new post (use `_title` for drafts)
-- `pnpm update-link-metadata` - Refresh metadata for `::link` cards (use `--force` to re-fetch existing entries)
-- `pnpm update-theme` - Update the theme to the latest version
-
-## References
-
-- https://paco.me/
-- https://benji.org/
-- https://shud.in/
-- https://retypeset.radishzz.cc/
-
-## License
-
-MIT
+This theme is based off of the lovely [Bear Blog](https://github.com/HermanMartinus/bearblog/).
