@@ -23,5 +23,8 @@
     "remark-math": "^6.0.0",
     "sharp": "^0.34.3",
     "unist-util-visit": "^5.1.0"
+  },
+  "devDependencies": {
+    "@types/js-yaml": "^4.0.9"
   }
 }
