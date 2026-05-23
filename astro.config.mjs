@@ -1,5 +1,4 @@
 // @ts-check
-
 import mdx from '@astrojs/mdx';
 import sitemap from '@astrojs/sitemap';
 import { defineConfig, fontProviders } from 'astro/config';
@@ -23,7 +22,6 @@ export default defineConfig({
 			fallbacks: ['monospace'],
 			display: 'swap',
 			subsets: ['latin'],
-			// unicodeRange: ['U+25CA'],
 			options: {
 				variants: [
 					{

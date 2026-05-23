@@ -4,7 +4,7 @@ import { getCollection } from 'astro:content';
 const { title } = Astro.props;
 const extra = [{ id: 'cours', title: 'Courses' }];
 const fromCollection = (await getCollection('pages'))
-    .filter((p) => p.id !== 'index')
+    .filter((p) => p.id !== 'index' && !p.data['no-nav'])
     .map((p) => ({ id: p.id, title: p.data.title }));
 const seen = new Set(fromCollection.map((p) => p.id));
 const pages = [...fromCollection, ...extra.filter((e) => !seen.has(e.id))]

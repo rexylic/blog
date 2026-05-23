@@ -8,6 +8,7 @@ const pages = defineCollection({
 		z.object({
 			title: z.string(),
 			math: z.boolean().optional(),
+			'no-nav': z.boolean().optional(),
 		}),
 });
 
