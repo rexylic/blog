@@ -9,7 +9,7 @@ import rehypeMdxJsxHeadings from './src/rehype-mdx-jsx-headings.mjs';
 
 // https://astro.build/config
 export default defineConfig({
-	site: 'https://blog.rexylic.com',
+	site: 'https://rexylic.com',
 	integrations: [mdx(), sitemap()],
 	markdown: {
 		remarkPlugins: [remarkMath],
